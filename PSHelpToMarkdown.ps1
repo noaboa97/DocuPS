@@ -1,6 +1,6 @@
-$module = get-module XMCmdlets
+$module = get-module PrtgApiTools -ListAvailable
 
-$path = "U:\Readme.md"
+$path = "C:\Users\noah\Github\PrtgApiTools\Readme.md"
 
 New-Item -Path $path -force | out-null
 
@@ -28,7 +28,7 @@ foreach($function in $cmdlets.Values){
     $name = $function.name
     $help = Get-Help $function.name
 
-    Add-Content -Path $path -Value "| $($name) | $($help.synopsis) | PowerShell $($help.category) |"
+    Add-Content -Path $path -Value "| $($name) | $($help.synopsis.replace("`r`n"," ").trim())| PowerShell $($help.category) |"
     #Write-Host "| $($function.values) | $((Get-Help $function.values).synopsis) | PowerShell $((Get-Help get-xmctoken).category) |"
 
     
@@ -84,7 +84,8 @@ foreach($function in $cmdlets.values){
     Add-Content -Path $path -Value '```'
 
     Add-Content -Path $path -Value '``` powershell'
-    Add-Content -Path $path -Value "$($examples.trim())"
+    $val = if($examples){"$($examples.trim())"}
+    Add-Content -Path $path -Value $val
     Add-Content -Path $path -Value '```'
 
 }

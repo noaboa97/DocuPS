@@ -16,7 +16,10 @@ $cmdlets = $module.ExportedCommands
         $name = $function.name
         $help = Get-Help $function.name
 
-        $value += "`n| $($name) | $($help.synopsis) | PowerShell $($help.category) |"
+
+        $trimmedsynopsis = $($help.synopsis.replace("`r`n"," ").trim())
+
+        $value += "`n| $($name) | $(if($trimmedsynopsis -eq $name){" "}else{$($help.Synopsis.trim())}) | PowerShell $($help.category) |"
                 
     }
 

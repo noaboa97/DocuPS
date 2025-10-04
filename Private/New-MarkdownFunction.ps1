@@ -46,6 +46,8 @@ foreach($function in $cmdlets.values){
     
     }
 
+    $ex = if($examples){"$($examples.trim())"}else{" "}
+
     $value += @'
 
 ### {0}
@@ -60,7 +62,7 @@ foreach($function in $cmdlets.values){
 {2}
 ```
 
-'@ -f $func.name, $syntax.trim(), $examples.trim()
+'@ -f $func.name, $syntax.trim(), $ex
 
     #$value
     }

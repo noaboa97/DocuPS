@@ -1,0 +1,4 @@
+.vscode
+*.nupkg
+.idea/
+.DS_Store
